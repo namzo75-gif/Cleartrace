@@ -96,6 +96,96 @@ const starterBrokers: BrokerFinding[] = [
   },
 ];
 
+function HeroArtwork() {
+  return (
+    <div className="hero-visual" aria-hidden="true">
+      <div className="visual-frame">
+        <div className="visual-topbar">
+          <div className="window-dots">
+            <span className="dot red" />
+            <span className="dot amber" />
+            <span className="dot green" />
+          </div>
+          <span className="visual-caption">Live scan</span>
+        </div>
+
+        <div className="visual-main-panel">
+          <div className="monitoring-ring-wrap">
+            <svg className="monitoring-ring" viewBox="0 0 180 180" role="img">
+              <defs>
+                <linearGradient
+                  id="ringGradient"
+                  x1="0%"
+                  x2="100%"
+                  y1="0%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stopColor="#d7ebff" />
+                  <stop offset="50%" stopColor="#8bc6f2" />
+                  <stop offset="100%" stopColor="#0f1717" />
+                </linearGradient>
+              </defs>
+              <circle
+                cx="90"
+                cy="90"
+                r="62"
+                fill="none"
+                stroke="rgba(255,255,255,0.14)"
+                strokeWidth="16"
+              />
+              <circle
+                cx="90"
+                cy="90"
+                r="62"
+                fill="none"
+                stroke="url(#ringGradient)"
+                strokeWidth="16"
+                strokeLinecap="round"
+                strokeDasharray="280 220"
+                transform="rotate(-90 90 90)"
+              />
+            </svg>
+            <div className="ring-label">
+              <strong>87%</strong>
+              <span>coverage</span>
+            </div>
+          </div>
+
+          <div className="visual-side-stack">
+            <div className="mini-stat">
+              <span className="mini-label">Flagged</span>
+              <strong>+14</strong>
+            </div>
+            <div className="mini-chart" aria-hidden="true">
+              <span style={{ height: "40%" }} />
+              <span style={{ height: "62%" }} />
+              <span style={{ height: "78%" }} />
+              <span style={{ height: "58%" }} />
+              <span style={{ height: "90%" }} />
+              <span style={{ height: "70%" }} />
+            </div>
+          </div>
+        </div>
+
+        <div className="visual-footer">
+          <div>
+            <span>last sync</span>
+            <strong>2 min ago</strong>
+          </div>
+          <div>
+            <span>verified</span>
+            <strong>13 items</strong>
+          </div>
+          <div>
+            <span>risk</span>
+            <strong>Watchlist</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [form, setForm] = useState({
     name: "",
@@ -352,6 +442,25 @@ function App() {
               </span>
             </div>
           </div>
+
+          <div className="signal-strip" aria-label="Monitoring signal summary">
+            <div className="signal-card signal-card-primary">
+              <span className="label">Visible</span>
+              <strong>23</strong>
+              <small>listing alerts</small>
+            </div>
+            <div className="signal-card">
+              <span className="label">Removed</span>
+              <strong>11</strong>
+              <small>resolved</small>
+            </div>
+            <div className="signal-card">
+              <span className="label">Monitored</span>
+              <strong>24/7</strong>
+              <small>runtime</small>
+            </div>
+          </div>
+
           <div
             className="proof-ledger-card"
             aria-label="Sample verification record"
@@ -373,6 +482,8 @@ function App() {
             </div>
           </div>
         </div>
+
+        <HeroArtwork />
 
         <form className="scan-form" onSubmit={handleSubmit}>
           <label>
@@ -536,6 +647,45 @@ function App() {
           </div>
         </section>
 
+        <div
+          className="report-surface"
+          aria-label="Executive reporting dashboard"
+        >
+          <div className="report-header">
+            <div>
+              <span className="mini-kicker">Exposure board</span>
+              <h3>Broker visibility</h3>
+            </div>
+            <span className="live-badge">Live</span>
+          </div>
+          <div className="report-grid">
+            <div className="line-chart" aria-hidden="true">
+              <span style={{ height: "24%" }} />
+              <span style={{ height: "36%" }} />
+              <span style={{ height: "42%" }} />
+              <span style={{ height: "52%" }} />
+              <span style={{ height: "66%" }} />
+              <span style={{ height: "74%" }} />
+              <span style={{ height: "88%" }} />
+              <span style={{ height: "100%" }} />
+            </div>
+            <div className="report-stack">
+              <div className="report-chip report-chip-critical">
+                <span>Critical</span>
+                <strong>6</strong>
+              </div>
+              <div className="report-chip">
+                <span>Resolved</span>
+                <strong>11</strong>
+              </div>
+              <div className="report-chip">
+                <span>Watchlist</span>
+                <strong>24h</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {isScanning ? (
           <p className="status-message">{statusMessage}</p>
         ) : results.length === 0 ? (
@@ -599,7 +749,7 @@ function App() {
       >
         <div className="social-proof-copy">
           <p className="eyebrow">coverage</p>
-          <h2>The numbers that indicate the system is working.</h2>
+          <h2>The metrics that show the system is performing.</h2>
           <p>
             Coverage, response time, and verifiable progress matter more than a
             polished promise. These are the signals people actually check.
@@ -922,7 +1072,7 @@ function App() {
       </section>
 
       <footer className="site-footer">
-        <div>
+        <div className="footer-brand">
           <p className="brand-mark">Cleartrace</p>
           <p>Privacy monitoring with a clear record of what changed.</p>
         </div>

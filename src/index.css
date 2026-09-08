@@ -58,15 +58,19 @@
 
 body {
   margin: 0;
-  background: linear-gradient(180deg, #efebe4 0%, #e5e0d8 100%);
-  color: var(--text);
+  background: radial-gradient(circle at top, rgba(91, 120, 255, 0.24), transparent 28%),
+    linear-gradient(180deg, #07111d 0%, #0d1727 40%, #101d2b 100%);
+  color: #e4edf8;
+  line-height: 1.55;
 }
 
 h1,
-h2 {
+h2,
+h3,
+h4 {
   font-family: var(--heading);
   font-weight: 500;
-  color: var(--text-h);
+  color: #edf4ff;
   margin: 0;
 }
 
