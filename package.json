@@ -9,7 +9,8 @@
     "seed": "node seed.js",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.js"
   },
   "dependencies": {
     "better-sqlite3": "^13.0.2",

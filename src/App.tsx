@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3001";
+
 type BrokerStatus = "Not Found" | "Found" | "Removal in Progress";
 type RiskTier = "Critical" | "High" | "Medium" | "Low";
 
@@ -294,14 +296,11 @@ function App() {
   const applySeatChange = async () => {
     if (pendingSeatChange !== null) {
       try {
-        const response = await fetch(
-          "http://localhost:3001/api/subscriptions",
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ seats: pendingSeatChange }),
-          },
-        );
+        const response = await fetch(`${API_BASE_URL}/api/subscriptions`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ seats: pendingSeatChange }),
+        });
 
         if (response.ok) {
           const payload = await response.json();
@@ -326,8 +325,8 @@ function App() {
     const loadState = async () => {
       try {
         const [scanResponse, subscriptionResponse] = await Promise.all([
-          fetch("http://localhost:3001/api/scan-state"),
-          fetch("http://localhost:3001/api/subscriptions"),
+          fetch(`${API_BASE_URL}/api/scan-state`),
+          fetch(`${API_BASE_URL}/api/subscriptions`),
         ]);
 
         if (scanResponse.ok) {
@@ -379,7 +378,7 @@ function App() {
         results: starterBrokers,
       };
 
-      const response = await fetch("http://localhost:3001/api/scan-state", {
+      const response = await fetch(`${API_BASE_URL}/api/scan-state`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -941,20 +940,17 @@ function App() {
                 event.preventDefault();
 
                 try {
-                  const response = await fetch(
-                    "http://localhost:3001/api/leads",
-                    {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({
-                        name: leadForm.name,
-                        email: leadForm.email,
-                        company: leadForm.company,
-                        teamSize: leadForm.teamSize,
-                        source: leadForm.source,
-                      }),
-                    },
-                  );
+                  const response = await fetch(`${API_BASE_URL}/api/leads`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      name: leadForm.name,
+                      email: leadForm.email,
+                      company: leadForm.company,
+                      teamSize: leadForm.teamSize,
+                      source: leadForm.source,
+                    }),
+                  });
 
                   if (response.ok) {
                     const payload = await response.json();

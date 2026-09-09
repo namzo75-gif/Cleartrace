@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: cleartrace-api
+    env: node
+    plan: free
+    region: oregon
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CLEARTRACE_DB
+        value: postgres
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cleartrace-db
+          property: connectionString
+
+databases:
+  - name: cleartrace-db
+    databaseName: cleartrace
+    user: cleartrace
